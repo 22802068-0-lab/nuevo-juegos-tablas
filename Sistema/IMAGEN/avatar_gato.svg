@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <circle cx="60" cy="60" r="56" fill="#6C5CE7" />
+  <circle cx="60" cy="60" r="50" fill="#A29BFE" opacity="0.4" />
+  <polygon points="32,45 42,20 54,36" fill="#FFA502" stroke="#E67E22" stroke-width="2" />
+  <polygon points="88,45 78,20 66,36" fill="#FFA502" stroke="#E67E22" stroke-width="2" />
+  <polygon points="36,42 43,26 50,37" fill="#FF7675" />
+  <polygon points="84,42 77,26 70,37" fill="#FF7675" />
+  <circle cx="60" cy="65" r="34" fill="#FFA502" />
+  <circle cx="42" cy="72" r="6" fill="#FF7675" opacity="0.6" />
+  <circle cx="78" cy="72" r="6" fill="#FF7675" opacity="0.6" />
+  <ellipse cx="48" cy="60" rx="5" ry="7" fill="#2F3542" />
+  <ellipse cx="72" cy="60" rx="5" ry="7" fill="#2F3542" />
+  <circle cx="46" cy="58" r="2" fill="#FFFFFF" />
+  <circle cx="70" cy="58" r="2" fill="#FFFFFF" />
+  <polygon points="60,67 56,64 64,64" fill="#FF4757" />
+  <path d="M56,70 Q60,74 64,70" stroke="#2F3542" stroke-width="2" fill="none" stroke-linecap="round" />
+  <line x1="28" y1="65" x2="40" y2="67" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+  <line x1="28" y1="73" x2="40" y2="71" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+  <line x1="92" y1="65" x2="80" y2="67" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+  <line x1="92" y1="73" x2="80" y2="71" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+  <path d="M35,38 Q60,25 85,38" stroke="#FFFFFF" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.6" />
+</svg>

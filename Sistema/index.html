@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema Mis Tablas - Plataforma Educativa 4° Básico</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700;800;900&family=Nunito:wght@700;900&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body>
+
+  <!-- Top Sticky Navigation Bar -->
+  <header class="top-navbar">
+    <!-- Brand / Home trigger -->
+    <div class="brand-section" onclick="window.app.showSection('home')">
+      <img src="IMAGEN/logo.svg" alt="Logo Mis Tablas" class="brand-logo">
+      <div class="brand-text">
+        <h1>MIS TABLAS</h1>
+        <span>PLATAFORMA EDUCATIVA 4° BÁSICO</span>
+      </div>
+    </div>
+
+    <!-- Student Info Badge -->
+    <div class="student-header-badge">
+      <img src="IMAGEN/avatar_gato.svg" alt="Avatar Estudiante" id="headerAvatarImg" class="student-header-avatar">
+      <div class="student-header-info">
+        <strong id="headerStudentName">Estudiante</strong>
+        <small id="headerStudentTitle">Nivel 1: Aprendiz</small>
+      </div>
+    </div>
+
+    <!-- Score & Stars Pill -->
+    <div class="header-score-pill">
+      <span>⭐ <strong id="headerStars">0</strong></span>
+      <span>🏆 <strong id="headerScore">0</strong> pts</span>
+    </div>
+
+    <!-- System Controls (Sound, Voice, Change Student) -->
+    <div class="header-controls">
+      <button class="btn-ctrl" id="navSoundBtn" title="Activar/Desactivar Sonidos">
+        🔊 <span>Sonido</span>
+      </button>
+      <button class="btn-ctrl" id="navVoiceBtn" title="Activar/Desactivar Locución de Voz">
+        🗣️ <span>Voz On</span>
+      </button>
+      <button class="btn-ctrl" id="navLogoutBtn" title="Cambiar de estudiante">
+        👤 <span>Cambiar</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Section Tabs Strip -->
+  <nav class="main-nav-tabs">
+    <button class="nav-tab active" id="tab-home" onclick="window.app.showSection('home')">
+      🏠 <span>Menú Principal</span>
+    </button>
+    <button class="nav-tab" id="tab-learn" onclick="window.app.showSection('learn')">
+      📚 <span>Aprender Tablas</span>
+    </button>
+    <button class="nav-tab" id="tab-games" onclick="window.app.showSection('games')">
+      🎮 <span>Juegos y Desafíos</span>
+    </button>
+    <button class="nav-tab" id="tab-progress" onclick="window.app.showSection('progress')">
+      📊 <span>Mi Progreso</span>
+    </button>
+    <button class="nav-tab" id="tab-achievements" onclick="window.app.showSection('achievements')">
+      🏆 <span>Logros y Medallas</span>
+    </button>
+    <button class="nav-tab special-simce" id="tab-simce" onclick="window.app.showSection('simce')">
+      📝 <span>Ensayo SIMCE 4°</span>
+    </button>
+  </nav>
+
+  <!-- Main View Area -->
+  <main class="app-container">
+    <!-- 1. Home Section -->
+    <section id="section-home" class="app-section">
+      <div id="homeContainer"></div>
+    </section>
+
+    <!-- 2. Learn Tables Section -->
+    <section id="section-learn" class="app-section" style="display: none;">
+      <div id="learnContainer"></div>
+    </section>
+
+    <!-- 3. Games & Challenges Section -->
+    <section id="section-games" class="app-section" style="display: none;">
+      <div id="gamesContainer"></div>
+    </section>
+
+    <!-- 4. Progress Dashboard Section -->
+    <section id="section-progress" class="app-section" style="display: none;">
+      <div id="progressContainer"></div>
+    </section>
+
+    <!-- 5. Achievements & Trophies Section -->
+    <section id="section-achievements" class="app-section" style="display: none;">
+      <div id="achievementsContainer"></div>
+    </section>
+
+    <!-- 6. SIMCE Examination Section -->
+    <section id="section-simce" class="app-section" style="display: none;">
+      <div id="simceArea"></div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <p>Proyecto Plataforma Educativa "Mis Tablas" • Departamento de Informática</p>
+    <p>Diseñado para el aprendizaje activo y preparación SIMCE de estudiantes de 4° Básico</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="JS/audio.js"></script>
+  <script src="JS/data.js"></script>
+  <script src="JS/games.js"></script>
+  <script src="JS/simce.js"></script>
+  <script src="JS/app.js"></script>
+</body>
+</html>

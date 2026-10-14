@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6B6B" />
+      <stop offset="50%" stop-color="#4ECDC4" />
+      <stop offset="100%" stop-color="#FFE66D" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <!-- Background Badge -->
+  <circle cx="100" cy="100" r="90" fill="url(#bgGrad)" filter="url(#shadow)"/>
+  <circle cx="100" cy="100" r="82" fill="#FFFFFF" fill-opacity="0.95"/>
+  
+  <!-- Math symbols in circle background -->
+  <text x="35" y="60" font-family="'Comic Sans MS', sans-serif" font-size="22" font-weight="bold" fill="#FF6B6B" opacity="0.7">×</text>
+  <text x="145" y="60" font-family="'Comic Sans MS', sans-serif" font-size="22" font-weight="bold" fill="#4ECDC4" opacity="0.7">+</text>
+  <text x="35" y="155" font-family="'Comic Sans MS', sans-serif" font-size="22" font-weight="bold" fill="#FFE66D" opacity="0.7">=</text>
+  <text x="145" y="155" font-family="'Comic Sans MS', sans-serif" font-size="22" font-weight="bold" fill="#6C5CE7" opacity="0.7">÷</text>
+
+  <!-- Central Notebook / Blackboard -->
+  <rect x="52" y="48" width="96" height="76" rx="14" fill="#2C3E50" />
+  <rect x="58" y="54" width="84" height="64" rx="10" fill="#34495E" />
+  
+  <!-- Multiplication formula on board -->
+  <text x="100" y="85" text-anchor="middle" font-family="'Arial Rounded MT Bold', sans-serif" font-size="20" font-weight="bold" fill="#FFEAA7">4 × 8 = 32</text>
+  <text x="100" y="106" text-anchor="middle" font-family="'Arial Rounded MT Bold', sans-serif" font-size="13" font-weight="bold" fill="#55E6C1">¡SUPER FÁCIL!</text>
+
+  <!-- Star Character / Mascot on bottom-center -->
+  <g transform="translate(100, 145)">
+    <!-- Small star mascot -->
+    <path d="M 0,-25 L 7,-8 L 25,-8 L 11,4 L 16,21 L 0,11 L -16,21 L -11,4 L -25,-8 L -7,-8 Z" fill="#F1C40F" stroke="#E67E22" stroke-width="2"/>
+    <!-- Cute face on star -->
+    <circle cx="-5" cy="0" r="2.5" fill="#2C3E50"/>
+    <circle cx="5" cy="0" r="2.5" fill="#2C3E50"/>
+    <ellipse cx="-7" cy="4" rx="2" ry="1" fill="#FF7675"/>
+    <ellipse cx="7" cy="4" rx="2" ry="1" fill="#FF7675"/>
+    <path d="M -3,5 Q 0,8 3,5" stroke="#2C3E50" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  </g>
+</svg>

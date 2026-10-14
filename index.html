@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis Tablas - ¡Aprende Multiplicando!</title>
+  <!-- Google Fonts para una tipografía amigable y lúdica -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #FF6B6B;
+      --secondary: #4ECDC4;
+      --accent: #FFE66D;
+      --purple: #6C5CE7;
+      --dark: #2D3436;
+      --light: #F8F9FA;
+      --card-bg: rgba(255, 255, 255, 0.95);
+      --shadow-lg: 0 15px 35px rgba(0,0,0,0.15);
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Fredoka', 'Nunito', sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #6C5CE7 0%, #a29bfe 30%, #74b9ff 70%, #55efc4 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Floating math elements background */
+    .bg-math {
+      position: absolute;
+      font-weight: 900;
+      color: rgba(255, 255, 255, 0.22);
+      user-select: none;
+      pointer-events: none;
+      animation: floatSlow 8s ease-in-out infinite alternate;
+      z-index: 0;
+    }
+    @keyframes floatSlow {
+      0% { transform: translateY(0) rotate(0deg) scale(1); }
+      100% { transform: translateY(-40px) rotate(15deg) scale(1.1); }
+    }
+
+    /* Sound Control Button */
+    .sound-toggle-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 10;
+      background: white;
+      border: 3px solid var(--purple);
+      border-radius: 50px;
+      padding: 8px 16px;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--purple);
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+    .sound-toggle-btn:hover {
+      transform: scale(1.05);
+      background: #f1f2f6;
+    }
+
+    /* Main Container */
+    .login-container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 680px;
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      padding: 35px 30px;
+      text-align: center;
+      border: 4px solid #FFFFFF;
+      animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes popIn {
+      0% { opacity: 0; transform: scale(0.85) translateY(20px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* Header & Logo */
+    .header-logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .logo-img {
+      width: 95px;
+      height: 95px;
+      animation: floatLogo 3s ease-in-out infinite;
+      filter: drop-shadow(0 8px 12px rgba(108, 92, 231, 0.3));
+    }
+    @keyframes floatLogo {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .title-main {
+      font-size: 32px;
+      font-weight: 900;
+      color: #2D3436;
+      margin-top: 10px;
+      letter-spacing: -0.5px;
+      text-transform: uppercase;
+      background: linear-gradient(45deg, #FF6B6B, #6C5CE7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .badge-sub {
+      background: #FFEAA7;
+      color: #D35400;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 5px 16px;
+      border-radius: 20px;
+      margin-top: 5px;
+      display: inline-block;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.06);
+    }
+
+    /* Step Prompts */
+    .step-label {
+      font-size: 18px;
+      font-weight: 700;
+      color: #2F3542;
+      margin: 22px 0 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .step-label span.num {
+      background: var(--purple);
+      color: white;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    /* Name Input Box */
+    .input-wrapper {
+      position: relative;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+    .student-input {
+      width: 100%;
+      padding: 16px 20px 16px 50px;
+      font-family: inherit;
+      font-size: 18px;
+      font-weight: 700;
+      border: 3px solid #DFE4EA;
+      border-radius: 18px;
+      outline: none;
+      transition: all 0.25s ease;
+      background: #F1F2F6;
+      color: #2F3542;
+    }
+    .student-input:focus {
+      background: #FFFFFF;
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 5px rgba(78, 205, 196, 0.25);
+    }
+    .input-icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 22px;
+      pointer-events: none;
+    }
+
+    /* Avatar Grid */
+    .avatar-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 10px;
+    }
+    @media (max-width: 540px) {
+      .avatar-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+      .title-main {
+        font-size: 26px;
+      }
+    }
+
+    .avatar-card {
+      background: #FFFFFF;
+      border: 3px solid #EDF2F7;
+      border-radius: 18px;
+      padding: 12px 8px;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+    }
+    .avatar-card:hover {
+      transform: translateY(-5px) scale(1.03);
+      border-color: var(--secondary);
+      box-shadow: 0 10px 20px rgba(78, 205, 196, 0.25);
+    }
+    .avatar-card.selected {
+      border-color: var(--purple);
+      background: #F3EEFF;
+      transform: translateY(-6px) scale(1.05);
+      box-shadow: 0 12px 24px rgba(108, 92, 231, 0.3);
+    }
+    .avatar-card.selected::after {
+      content: "✔";
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: var(--purple);
+      color: white;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 900;
+      border: 2px solid white;
+    }
+
+    .avatar-card img {
+      width: 65px;
+      height: 65px;
+      transition: transform 0.3s ease;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.08));
+    }
+    .avatar-card:hover img {
+      transform: rotate(5deg) scale(1.1);
+    }
+    .avatar-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #4A4B4D;
+      margin-top: 6px;
+    }
+    .avatar-card.selected .avatar-name {
+      color: var(--purple);
+      font-weight: 900;
+    }
+
+    /* Start Button */
+    .btn-start {
+      margin-top: 26px;
+      width: 100%;
+      max-width: 420px;
+      padding: 16px 30px;
+      background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-family: inherit;
+      font-size: 20px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(255, 107, 107, 0.45);
+      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-start:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 14px 28px rgba(255, 107, 107, 0.6);
+    }
+    .btn-start:active {
+      transform: translateY(1px) scale(0.98);
+    }
+    .btn-start::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(60deg, transparent, rgba(255,255,255,0.3), transparent);
+      transform: rotate(30deg);
+      animation: shineBtn 3.5s infinite;
+    }
+    @keyframes shineBtn {
+      0% { transform: translateX(-100%) rotate(30deg); }
+      20%, 100% { transform: translateX(100%) rotate(30deg); }
+    }
+
+    /* Error Shake Animation */
+    .shake {
+      animation: shakeAnim 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    }
+    @keyframes shakeAnim {
+      10%, 90% { transform: translate3d(-2px, 0, 0); }
+      20%, 80% { transform: translate3d(4px, 0, 0); }
+      30%, 50%, 70% { transform: translate3d(-6px, 0, 0); }
+      40%, 60% { transform: translate3d(6px, 0, 0); }
+    }
+
+    .error-msg {
+      color: #E84118;
+      font-size: 14px;
+      font-weight: 700;
+      margin-top: 8px;
+      min-height: 20px;
+    }
+
+    /* Existing Profile Card (if found) */
+    .saved-profile-box {
+      margin-top: 15px;
+      padding: 12px 18px;
+      background: #E8F8F5;
+      border: 2px dashed #4ECDC4;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .saved-profile-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-align: left;
+    }
+    .saved-profile-info img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+    .saved-profile-info div strong {
+      display: block;
+      color: #2C3E50;
+      font-size: 15px;
+    }
+    .saved-profile-info div span {
+      font-size: 12px;
+      color: #16A085;
+      font-weight: 700;
+    }
+    .btn-quick-play {
+      background: #4ECDC4;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 12px;
+      font-family: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.2s;
+    }
+    .btn-quick-play:hover {
+      background: #1ABC9C;
+      transform: scale(1.05);
+    }
+
+    /* Footer department credits */
+    .dept-footer {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #718096;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Math Symbols -->
+  <div class="bg-math" style="top: 8%; left: 10%; font-size: 42px;">6 × 7 = 42</div>
+  <div class="bg-math" style="top: 15%; right: 12%; font-size: 38px;">9 × 9 = 81</div>
+  <div class="bg-math" style="bottom: 12%; left: 8%; font-size: 45px;">4 × 5 = 20</div>
+  <div class="bg-math" style="bottom: 18%; right: 10%; font-size: 40px;">8 × 3 = 24</div>
+  <div class="bg-math" style="top: 45%; left: 3%; font-size: 36px;">★ SIMCE ★</div>
+  <div class="bg-math" style="top: 50%; right: 4%; font-size: 36px;">7 × 8 = 56</div>
+
+  <!-- Audio Controls -->
+  <button class="sound-toggle-btn" id="soundBtn" onclick="toggleAppSound()">
+    <span id="soundIcon">🔊</span> Sonido
+  </button>
+
+  <main class="login-container" id="loginCard">
+    <!-- Header with Mascot Logo -->
+    <div class="header-logo">
+      <img src="Sistema/IMAGEN/logo.svg" alt="Logo Mis Tablas" class="logo-img">
+      <h1 class="title-main">MIS TABLAS</h1>
+      <span class="badge-sub">🌟 4° BÁSICO • MATEMÁTICA Y SIMCE 🌟</span>
+    </div>
+
+    <!-- Quick resume profile if student already played -->
+    <div id="savedProfileArea" style="display: none;"></div>
+
+    <!-- Step 1: Student Name -->
+    <div class="step-label">
+      <span class="num">1</span>
+      <span>¿Cómo te llamas, superestudiante?</span>
+    </div>
+    <div class="input-wrapper">
+      <span class="input-icon">✏️</span>
+      <input type="text" id="studentName" class="student-input" placeholder="Escribe tu nombre aquí..." maxlength="20" autocomplete="off">
+    </div>
+
+    <!-- Step 2: Choose Avatar -->
+    <div class="step-label">
+      <span class="num">2</span>
+      <span>Elige a tu compañero de aventura:</span>
+    </div>
+    <div class="avatar-grid" id="avatarGrid">
+      <!-- Avatars rendered dynamically by JS -->
+    </div>
+
+    <div class="error-msg" id="errorMsg"></div>
+
+    <!-- Step 3: Start Button -->
+    <button class="btn-start" id="startBtn" onclick="handleLogin()">
+      <span>¡ENTRAR AL JUEGO!</span>
+      <span>🚀</span>
+    </button>
+
+    <div class="dept-footer">
+      Departamento de Informática • Preparación y Aventura Matemática 4° Básico
+    </div>
+  </main>
+
+  <!-- Load Web Audio engine -->
+  <script src="Sistema/JS/audio.js"></script>
+
+  <script>
+    const AVATARS_DATA = [
+      { id: 'gato', name: 'Astro-Gato', img: 'Sistema/IMAGEN/avatar_gato.svg', greeting: '¡Miau! Listo para multiplicar por el espacio exterior' },
+      { id: 'robot', name: 'Robotín', img: 'Sistema/IMAGEN/avatar_robot.svg', greeting: '¡Beep boop! Calculando diversión matemática al 100%' },
+      { id: 'zorro', name: 'Zorro Sabio', img: 'Sistema/IMAGEN/avatar_zorro.svg', greeting: '¡La astucia de las matemáticas está con nosotros!' },
+      { id: 'dragon', name: 'Dragón Chispas', img: 'Sistema/IMAGEN/avatar_dragon.svg', greeting: '¡Fuego y números! Nada nos detendrá' },
+      { id: 'nina', name: 'Súper Niña', img: 'Sistema/IMAGEN/avatar_nina.svg', greeting: '¡Vamos con todo por el puntaje perfecto!' },
+      { id: 'nino', name: 'Súper Niño', img: 'Sistema/IMAGEN/avatar_nino.svg', greeting: '¡Aventura matemática en marcha!' },
+      { id: 'buho', name: 'Búho Genio', img: 'Sistema/IMAGEN/avatar_buho.svg', greeting: '¡Uhh uhh! Aprenderemos todos los trucos de las tablas' },
+      { id: 'mago', name: 'Mago Numérico', img: 'Sistema/IMAGEN/avatar_mago.svg', greeting: '¡Abracadabra! Convierte los números en magia pura' }
+    ];
+
+    let selectedAvatarId = null;
+
+    // Render avatar list
+    function renderAvatars() {
+      const grid = document.getElementById('avatarGrid');
+      grid.innerHTML = AVATARS_DATA.map(av => `
+        <div class="avatar-card" id="card-${av.id}" onclick="selectAvatar('${av.id}')">
+          <img src="${av.img}" alt="${av.name}">
+          <div class="avatar-name">${av.name}</div>
+        </div>
+      `).join('');
+    }
+
+    // Select Avatar
+    function selectAvatar(id) {
+      selectedAvatarId = id;
+      document.querySelectorAll('.avatar-card').forEach(card => card.classList.remove('selected'));
+      const activeCard = document.getElementById(`card-${id}`);
+      if (activeCard) {
+        activeCard.classList.add('selected');
+      }
+      
+      const av = AVATARS_DATA.find(a => a.id === id);
+      if (window.snd) {
+        window.snd.play('select');
+        if (av) {
+          window.snd.speak(`¡Elegiste a ${av.name}! ${av.greeting}`);
+        }
+      }
+
+      document.getElementById('errorMsg').textContent = '';
+    }
+
+    // Toggle Audio
+    function toggleAppSound() {
+      if (window.snd) {
+        const isEnabled = window.snd.toggleSound();
+        const icon = document.getElementById('soundIcon');
+        icon.textContent = isEnabled ? '🔊' : '🔇';
+      }
+    }
+
+    // Check for saved profile
+    function checkSavedProfile() {
+      try {
+        const saved = localStorage.getItem('misTablas_student');
+        if (saved) {
+          const profile = JSON.parse(saved);
+          if (profile && profile.name) {
+            const area = document.getElementById('savedProfileArea');
+            area.style.display = 'block';
+            const avatarSrc = profile.avatarImg 
+              ? (profile.avatarImg.startsWith('Sistema/') ? profile.avatarImg : 'Sistema/' + profile.avatarImg)
+              : 'Sistema/IMAGEN/avatar_gato.svg';
+            area.innerHTML = `
+              <div class="saved-profile-box">
+                <div class="saved-profile-info">
+                  <img src="${avatarSrc}" alt="Avatar">
+                  <div>
+                    <strong>¡Hola de nuevo, ${profile.name}!</strong>
+                    <span>Puntaje: ${profile.score || 0} pts • Estrellas: ${profile.stars || 0} ⭐</span>
+                  </div>
+                </div>
+                <button class="btn-quick-play" onclick="continueSavedProfile()">¡Continuar!</button>
+              </div>
+            `;
+          }
+        }
+      } catch (e) {
+        console.warn('Error reading saved profile:', e);
+      }
+    }
+
+    function continueSavedProfile() {
+      if (window.snd) {
+        window.snd.play('victory');
+        window.snd.speak('¡Bienvenido de vuelta! Vamos al sistema.');
+      }
+      setTimeout(() => {
+        window.location.href = 'Sistema/index.html';
+      }, 500);
+    }
+
+    // Handle Login Validation and Access
+    function handleLogin() {
+      const nameInput = document.getElementById('studentName');
+      const name = nameInput.value.trim();
+      const errorMsg = document.getElementById('errorMsg');
+      const card = document.getElementById('loginCard');
+
+      if (!name || name.length < 2) {
+        if (window.snd) {
+          window.snd.play('wrong');
+          window.snd.speak('¡Ups! Por favor escribe tu nombre para comenzar.');
+        }
+        card.classList.remove('shake');
+        void card.offsetWidth; // trigger reflow
+        card.classList.add('shake');
+        errorMsg.textContent = '⚠️ ¡Por favor escribe tu nombre (mínimo 2 letras)!';
+        nameInput.focus();
+        return;
+      }
+
+      if (!selectedAvatarId) {
+        if (window.snd) {
+          window.snd.play('wrong');
+          window.snd.speak('¡No olvides elegir a tu compañero avatar!');
+        }
+        card.classList.remove('shake');
+        void card.offsetWidth;
+        card.classList.add('shake');
+        errorMsg.textContent = '⚠️ ¡Elige uno de los personajes de arriba haciendo clic en él!';
+        return;
+      }
+
+      const avatar = AVATARS_DATA.find(a => a.id === selectedAvatarId);
+
+      // Preserve existing score/stats if same user name, or initialize new
+      let currentStats = {
+        score: 0,
+        stars: 0,
+        level: 1,
+        completedTables: [],
+        tableScores: {},
+        simceScore: null,
+        achievements: []
+      };
+
+      try {
+        const saved = localStorage.getItem('misTablas_student');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed && parsed.name && parsed.name.toLowerCase() === name.toLowerCase()) {
+            currentStats = { ...currentStats, ...parsed };
+          }
+        }
+      } catch (e) {}
+
+      const studentProfile = {
+        ...currentStats,
+        name: name,
+        avatarId: avatar.id,
+        avatarName: avatar.name,
+        avatarImg: avatar.img,
+        lastLogin: new Date().toISOString()
+      };
+
+      localStorage.setItem('misTablas_student', JSON.stringify(studentProfile));
+
+      if (window.snd) {
+        window.snd.play('victory');
+        window.snd.speak(`¡Excelente, ${name}! ¡Preparando tu aventura con ${avatar.name}!`);
+      }
+
+      const startBtn = document.getElementById('startBtn');
+      startBtn.innerHTML = `<span>¡Cargando Aventura...!</span> <span>⭐</span>`;
+      startBtn.style.background = 'linear-gradient(135deg, #10ac84 0%, #1dd1a1 100%)';
+
+      setTimeout(() => {
+        window.location.href = 'Sistema/index.html';
+      }, 900);
+    }
+
+    // Keyboard support: Enter key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        handleLogin();
+      }
+    });
+
+    // Init
+    window.addEventListener('DOMContentLoaded', () => {
+      renderAvatars();
+      checkSavedProfile();
+    });
+  </script>
+</body>
+</html>
